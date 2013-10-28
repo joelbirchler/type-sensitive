@@ -1,0 +1,61 @@
+var worksborks = require('./worksborks.js'),
+	works = worksborks.works,
+	borks = worksborks.borks,
+	safe = require('./safe.js');
+
+
+var title = function(message) {
+	console.log('--- ' + message.toUpperCase() + ' ---');
+};
+
+
+//
+// Test basic argument safety
+//
+
+title('Basic Args');
+
+var numStrFunc = function (num, str) { /* ... do stuff ... */ };
+var ns = safe(numStrFunc, "Number", "String");
+var nsWorks = works.bind(this, ns);
+var nsBorks = borks.bind(this, ns);
+
+nsWorks(42, "42");
+nsBorks([1,2,3], "42");
+nsBorks(42, 42);
+
+
+title('No Arguments');
+
+var emptyFunc = function () { /* ... do stuff ... */ };
+var e = safe(emptyFunc);
+var eWorks = works.bind(this, e);
+
+eWorks();
+
+
+//
+// Test custom predicate safety
+//
+
+title('Custom Predicate');
+
+var positiveNumFunc = function(num) { /* ... do stuff ... */ };
+var pn = safe(positiveNumFunc, function(n) { return n >= 0; });
+var pnWorks = works.bind(this, pn);
+var pnBorks = borks.bind(this, pn);
+
+pnWorks(12);
+pnWorks(3.14);
+pnWorks(0);
+pnBorks(-273.15);
+
+
+// TODO: README and LICENSE
+
+// TODO: Support comments via function.toString()
+//       safe(function (tacos /* Number */, s /* String */) { return 42; });
+
+// TODO: safe.isLongEnough = function(x) { return x.length > 8; };
+//       safe(function (password /* => isLongEnough */) { return 42; });
+
