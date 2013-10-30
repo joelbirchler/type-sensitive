@@ -26,7 +26,6 @@ var bruteArity = [
   /* beyond this and we explode... */
 ];
 
-// TODO: regex for /* predicate */ is 
 var argComments = function(func) {
   var s = func.toString();
   var args = s.slice(s.indexOf('('), s.indexOf(')'));
