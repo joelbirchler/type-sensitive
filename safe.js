@@ -26,8 +26,25 @@ var bruteArity = [
   /* beyond this and we explode... */
 ];
 
+// TODO: regex for /* predicate */ is 
+var argComments = function(func) {
+  var s = func.toString();
+  var args = s.slice(s.indexOf('('), s.indexOf(')'));
+
+  var re = /\/\*\s*(\S+)\s*\*\//g;
+  var matches = [], match;
+  while (match = re.exec(s)) { 
+    matches.push(match[1]) 
+  }
+
+  return matches;
+};
+
 var safe = function(func /*, argPredicates... */) {
   var restArgs = toArray(arguments, 1);
+
+  if (!restArgs.length) { restArgs = argComments(func); }
+
   var argPredicates = restArgs.map(function(arg) {
     return predicates.Function(arg) ? arg : predicates[arg];
   });
@@ -44,5 +61,7 @@ var safe = function(func /*, argPredicates... */) {
 
   return bruteArity[func.length].bind(this, safeFunc);
 };
+
+safe.argComments = argComments; // FIXME: remove
 
 module.exports = safe;

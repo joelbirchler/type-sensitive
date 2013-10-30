@@ -2,7 +2,7 @@ type-sensitive
 ==============
 
 Experimental type annotations for JavaScript. Type-sensitive adds checks to function arguments that can throw errors
-at run time.
+at run time. This is intended as an exercise, not a production-ready library or even a good idea.
 
 ## Usage
 
@@ -36,13 +36,13 @@ of a string.
 
 ### Comment Syntax!
 
-*Not yet implemented.*
-
 Calling toString() on a non-native function returns the source code for the function including comments. This allows us to 
 annotate our functions with predicates via comments.
 
     var testFunc = function(n /* Number */, s /* String */) {};
     var func = safe(testFunc);
+
+*Not yet implemented.*
 
 In order to support custom predicates, we add them as properties of `safe`.
 

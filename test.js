@@ -51,10 +51,17 @@ pnWorks(0);
 pnBorks(-273.15);
 
 
-// TODO: README and LICENSE
+//
+// Test supporting comments via function.toString()
+//
 
-// TODO: Support comments via function.toString()
-//       safe(function (tacos /* Number */, s /* String */) { return 42; });
+var commentFunc = safe(function(num /* Number */, s /* String */) { return 42; });
+var cWorks = works.bind(this, commentFunc);
+var cBorks = borks.bind(this, commentFunc);
+
+cWorks(4, 'apricot');
+cBorks(42, 108);
+
 
 // TODO: safe.isLongEnough = function(x) { return x.length > 8; };
 //       safe(function (password /* => isLongEnough */) { return 42; });
