@@ -63,6 +63,14 @@ cWorks(4, 'apricot');
 cBorks(42, 108);
 
 
-// TODO: safe.isLongEnough = function(x) { return x.length > 8; };
-//       safe(function (password /* => isLongEnough */) { return 42; });
+//
+// Test custom predicates attached to `safe`
+//
 
+safe.predicates.isLongEnough = function(n) { return n.length > 6; };
+var shortFunc = safe(function(password /* isLongEnough */) { /* ... do stuff ... */ });
+var shortWorks = works.bind(this, shortFunc);
+var shortBorks = borks.bind(this, shortFunc);
+
+shortWorks('foobarhowdyhey');
+shortBorks('foo');

@@ -61,6 +61,6 @@ var safe = function(func /*, argPredicates... */) {
   return bruteArity[func.length].bind(this, safeFunc);
 };
 
-safe.argComments = argComments; // FIXME: remove
+safe.predicates = predicates;
 
 module.exports = safe;
