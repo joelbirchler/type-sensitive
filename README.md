@@ -42,9 +42,9 @@ annotate our functions with predicates via comments.
     var testFunc = function(n /* Number */, s /* String */) {};
     var func = safe(testFunc);
 
-In order to support custom predicates, we add them as properties of `safe`.
+In order to support custom predicates, we add them as properties of `safe.predicates`.
 
-    safe.positive = function(n) { n >=0; }
+    safe.predicates.positive = function(n) { n >=0; }
     var testFunc = function(n /* positive */);
 
 ## Tests
